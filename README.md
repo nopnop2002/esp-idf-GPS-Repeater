@@ -5,6 +5,7 @@ Transfer GPS NMEA messages over Wifi
 I live in an apartment.   
 GPS signal does not reach my room.   
 I put my ESP32 and GPS receiver by the window and forward NMEA messages over WiFi.   
+
 ---
 
 # Hardware requirements
