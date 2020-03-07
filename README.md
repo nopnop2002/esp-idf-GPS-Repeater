@@ -1,11 +1,10 @@
 # esp-idf-GPS-Repeater
-Transfer GPS NMAE messages over Wifi   
+Transfer GPS NMEA messages over Wifi   
 
 # Background
 I live in an apartment.   
 GPS signal does not reach my room.   
-I put ESP32 on the veranda and forward NMEA messages over WiFi.   
-
+I put my ESP32 and GPS receiver by the window and forward NMEA messages over WiFi.   
 ---
 
 # Hardware requirements
@@ -36,9 +35,13 @@ You can configure UART GPIO port / WiFi setting using menuconfig.
 - Socket transfer using TCP
 ![0001](https://user-images.githubusercontent.com/6020549/76137836-c9741900-6084-11ea-8732-1719ad117cc2.jpg)
 
+![config_tcp](https://user-images.githubusercontent.com/6020549/76137931-b1e96000-6085-11ea-896f-2ba5a50127ce.jpg)
+
 
 - Broadcast using UDP
 ![0002](https://user-images.githubusercontent.com/6020549/76137839-d55fdb00-6084-11ea-94f5-3a81f9b1e29a.jpg)
+
+![config_udp](https://user-images.githubusercontent.com/6020549/76137943-c62d5d00-6085-11ea-8ecd-ce14da8832cb.jpg)
 
 You can use udp.py as receiver.
 
