@@ -30,6 +30,15 @@ Because uart_enable_pattern_det_intr() has been changed to uart_enable_pattern_d
 
 ---
 
+# Install
+```
+git clone https://github.com/nopnop2002/esp-idf-GPS-Repeater
+cd esp-idf-GPS-Repeater
+make menuconfig
+make install
+
+---
+
 # Configure
 You can configure UART GPIO port / WiFi setting using menuconfig.
 
