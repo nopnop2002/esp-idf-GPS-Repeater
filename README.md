@@ -9,14 +9,14 @@ I put my ESP32 and GPS receiver by the window and forward NMEA messages over WiF
 ---
 
 # Hardware requirements
-ESP32.  
-GPS module like NEO-6M.
+- ESP32   
+- GPS module like NEO-6M   
 
 ---
 
 # Software requirements
-esp-idf ver4.1 or later.   
-Because uart_enable_pattern_det_intr() has been changed to uart_enable_pattern_det_baud_intr().
+- esp-idf ver4.1 or later   
+ Because uart_enable_pattern_det_intr() has been changed to uart_enable_pattern_det_baud_intr().
 
 ---
 
