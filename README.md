@@ -57,7 +57,7 @@ You can configure UART GPIO port / WiFi setting using menuconfig.
 You can use udp.py as receiver.
 
 # GPS Server for u-center
-u-center is a very powerful NMEA message analysis tool.   
+[u-center](https://www.u-blox.com/en/product/u-center) is a very powerful NMEA message analysis tool.   
 You can use ESP32 as u-center's GPS Server.   
 ESP32 acts as a router.   
 The SSID of ESP32 is 'myssid'.   
