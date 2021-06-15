@@ -66,7 +66,7 @@ You can use udp.py as receiver.
 
 ![config-spp](https://user-images.githubusercontent.com/6020549/122000026-2498cd80-cde9-11eb-95b4-ff4458cc3502.jpg)
 
-You can use Iphome/Android as receiver.
+You can use Iphone/Android as receiver.
 
 # GPS Server for u-center
 [u-center](https://www.u-blox.com/en/product/u-center) is a very powerful NMEA message analysis tool.   
@@ -84,8 +84,8 @@ Default port is 5000.
 ![u-center-5](https://user-images.githubusercontent.com/6020549/62000221-57aa1900-b10c-11e9-833d-1a5a05aa68ae.jpg)
 
 # GPS Server for Bluetooth GPS
-Bluetooth GPS is Android Application.
-You can download from [here](https://play.google.com/store/apps/details?id=googoo.android.btgps).
+Bluetooth GPS is Android Application.   
+You can download from [here](https://play.google.com/store/apps/details?id=googoo.android.btgps).   
 1.Pair with ESP_SPP_ACCEPTOR.   
 2.Open application.   
 3.CONNECT.   
