@@ -9,12 +9,47 @@ menu "Application Configuration"
 			Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to RXD.
 			GPIO 00 assigned as TXD, but not used.
 
+	choice TRANSFER
+		prompt "Transfer mode"
+		default TCP_SOCKET
+		help
+			Select trasnfer mode.
+		config TCP_SOCKET
+			bool "TCP Socket"
+			help
+				ESP32 runs as TCP Server.
+		config UDP_BROADCAST
+			bool "UDP Broadcast"
+			help
+				ESP32 runs as UDP Server.
+		config BLUETOOTH_SPP
+			bool "Classic Bluetooth SPP Acceptor"
+			help
+				ESP32 runs as SPP Acceptor.
+	endchoice
+
+	config SERVER_PORT
+		depends on TCP_SOCKET
+		int "Port number of TCP Server"
+		default 5000
+		help
+			Port number of TCP Server.
+			u-centet connect to this port.
+
+	config BROADCAST_PORT
+		depends on UDP_BROADCAST
+		int "Port number of UDP Broadcast"
+		default 9000
+		help
+			Port number of UDP Broadcast.
+
 	choice WIFI_MODE
+		depends on TCP_SOCKET || UDP_BROADCAST
 		prompt "Wi-Fi Access mode"
 		default AP_MODE
 		help
 			Select Wi-Fi Access mode.
-		config ST_MODE
+		config STA_MODE
 			bool "Station MODE"
 			help
 				Wi-Fi is Station Mode.
@@ -25,17 +60,18 @@ menu "Application Configuration"
 	endchoice
 
 	config ESP_WIFI_SSID
+		depends on TCP_SOCKET || UDP_BROADCAST
 		string "WiFi SSID"
 		default "myssid"
 		help
 			SSID (network name) for the example to connect to.
 
 	config ESP_WIFI_PASSWORD
+		depends on TCP_SOCKET || UDP_BROADCAST
 		string "WiFi Password"
 		default "mypassword"
 		help
 			WiFi password (WPA or WPA2) for the example to use.
-
 
 	config ESP_MAX_STA_CONN
 		depends on AP_MODE
@@ -46,14 +82,14 @@ menu "Application Configuration"
 
 
 	config ESP_MAXIMUM_RETRY
-		depends on ST_MODE
+		depends on STA_MODE
 		int "Maximum retry"
 		default 5
 		help
 			Set the Maximum retry to avoid station reconnecting to the AP unlimited when the AP is really inexistent.
 
 	config STATIC_IP
-		depends on ST_MODE
+		depends on STA_MODE
 		bool "Enable Static IP Address"
 		default false
 		help
@@ -79,37 +115,6 @@ menu "Application Configuration"
 		default "255.255.255.0"
 		help
 			Static Netmask for Station.
-
-	choice TRANSFER
-		prompt "Transfer mode"
-		default TCP_SOCKET
-		help
-			Select trasnfer mode.
-		config TCP_SOCKET
-			bool "Socket Server by TCP"
-			help
-				Socket by TCP.
-		config UDP_BROADCAST
-			bool "Broadcast Client by UDP"
-			help
-				Broadcast by UDP.
-	endchoice
-
-	config SERVER_PORT
-		depends on TCP_SOCKET
-		int "Port number of TCP Server"
-		default 5000
-		help
-			Port number of TCP Server.
-			u-centet connect to this port.
-
-	config BROADCAST_PORT
-		depends on UDP_BROADCAST
-		int "Port number of UDP Broadcast"
-		default 9000
-		help
-			Port number of UDP Broadcast.
-
 
 endmenu
 
