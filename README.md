@@ -44,7 +44,7 @@ idf.py install
 # Configure
 You can configure UART GPIO port and transpfer protocol using menuconfig.
 
-- Transfer using TCP Socket   
+## Transfer using TCP Socket   
 ![0001](https://user-images.githubusercontent.com/6020549/121999796-c53abd80-cde8-11eb-9715-010d359806d6.jpg)
 
 ![config-socket](https://user-images.githubusercontent.com/6020549/121999980-15198480-cde9-11eb-8b99-c8cffb51eb4c.jpg)
@@ -52,7 +52,7 @@ You can configure UART GPIO port and transpfer protocol using menuconfig.
 You can use tcp.py as receiver.   
 `python ./tcp.py`
 
-- Transfer using UDP Broadcast   
+## Transfer using UDP Broadcast   
 ![0002](https://user-images.githubusercontent.com/6020549/121999806-c966db00-cde8-11eb-9e83-1bdf7018b47c.jpg)
 
 ![config-udp](https://user-images.githubusercontent.com/6020549/122000013-1e0a5600-cde9-11eb-8393-9f0b528c11cc.jpg)
@@ -60,7 +60,7 @@ You can use tcp.py as receiver.
 You can use udp.py as receiver.   
 `python ./udp.py`
 
-- Transfer using Bluetooth SPP   
+## Transfer using Bluetooth SPP   
 
 ![0003](https://user-images.githubusercontent.com/6020549/121999813-cbc93500-cde8-11eb-9de1-927f0d70b3af.jpg)
 
