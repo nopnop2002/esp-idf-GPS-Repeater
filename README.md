@@ -72,7 +72,7 @@ You can use Iphone/Android as receiver.
 [u-center](https://www.u-blox.com/en/product/u-center) is a very powerful NMEA message analysis tool.   
 You can use ESP32 as u-center's GPS Server.   
 ESP32 acts as a Socket Server.   
-Build with a configuration using TCP sockets.   
+Build the firmware using TCP socket.   
 
 Start u-center and connect to ESP32.   
 Default port is 5000.   
@@ -86,6 +86,9 @@ Default port is 5000.
 # GPS Server for Bluetooth GPS
 Bluetooth GPS is Android Application.   
 You can download from [here](https://play.google.com/store/apps/details?id=googoo.android.btgps).   
+ESP32 acts as a SPP Acceptor.   
+Build the firmware using Bluetooth SPP.   
+
 1.Pair with ESP_SPP_ACCEPTOR.   
 2.Open application.   
 3.CONNECT.   
