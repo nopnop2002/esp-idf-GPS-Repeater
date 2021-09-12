@@ -66,7 +66,7 @@ You can use udp.py as receiver.
 
 ![config-spp](https://user-images.githubusercontent.com/6020549/122000026-2498cd80-cde9-11eb-95b4-ff4458cc3502.jpg)
 
-You can use Iphone/Android as receiver.
+You can use iPhone/Android as receiver.
 
 # GPS Server for u-center
 [u-center](https://www.u-blox.com/en/product/u-center) is a very powerful NMEA message analysis tool.   
