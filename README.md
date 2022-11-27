@@ -6,19 +6,14 @@ I live in an apartment.
 GPS signal does not reach my room.   
 I put my ESP32 and GPS receiver by the window and forward NMEA messages over WiFi.   
 
----
-
-# Hardware requirements
-- ESP32   
-- GPS module like NEO-6M   
-
----
 
 # Software requirements
-- esp-idf ver4.1 or later   
- Because uart_enable_pattern_det_intr() has been changed to uart_enable_pattern_det_baud_intr().
+- esp-idf v4.4/v5.0   
 
----
+
+# Hardware requirements
+GPS module like NEO-6M   
+
 
 # Wireing to GPS module
 
@@ -28,9 +23,8 @@ I put my ESP32 and GPS receiver by the window and forward NMEA messages over WiF
 |GND|--|GND|
 |TXD|--|Any Pin|
 
----
 
-# Install
+# Installation
 ```
 git clone https://github.com/nopnop2002/esp-idf-GPS-Repeater
 cd esp-idf-GPS-Repeater
@@ -39,7 +33,6 @@ idf.py menuconfig
 idf.py flash
 ```
 
----
 
 # Configure
 You can configure UART GPIO port and transfer protocol using menuconfig.
@@ -47,7 +40,8 @@ You can configure UART GPIO port and transfer protocol using menuconfig.
 ## Transfer using TCP Socket   
 ![0001](https://user-images.githubusercontent.com/6020549/121999796-c53abd80-cde8-11eb-9715-010d359806d6.jpg)
 
-![config-socket](https://user-images.githubusercontent.com/6020549/121999980-15198480-cde9-11eb-8b99-c8cffb51eb4c.jpg)
+![config-tcp-ap](https://user-images.githubusercontent.com/6020549/204115300-0299a2bb-30a6-4889-b207-f2605adb4f8b.jpg)
+![config-tcp-sta](https://user-images.githubusercontent.com/6020549/204115301-b3619477-bc67-49cf-bd7c-c055038b53c4.jpg)
 
 You can use tcp.py as receiver.   
 `python ./tcp.py`
@@ -55,7 +49,8 @@ You can use tcp.py as receiver.
 ## Transfer using UDP Broadcast   
 ![0002](https://user-images.githubusercontent.com/6020549/121999806-c966db00-cde8-11eb-9e83-1bdf7018b47c.jpg)
 
-![config-udp](https://user-images.githubusercontent.com/6020549/122000013-1e0a5600-cde9-11eb-8393-9f0b528c11cc.jpg)
+![config-udp-ap](https://user-images.githubusercontent.com/6020549/204115314-54db412f-f918-4ab2-b78e-8e8c085aee5c.jpg)
+![config-udp-sta](https://user-images.githubusercontent.com/6020549/204115315-704c8603-b923-432a-befd-34146480aff0.jpg)
 
 You can use udp.py as receiver.   
 `python ./udp.py`

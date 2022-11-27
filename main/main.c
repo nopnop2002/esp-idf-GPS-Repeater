@@ -6,7 +6,9 @@
 	 software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
 	 CONDITIONS OF ANY KIND, either express or implied.
 */
+
 #include <stdio.h>
+#include <inttypes.h>
 #include <string.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -15,6 +17,7 @@
 #include "esp_err.h"
 #include "esp_log.h"
 #include "esp_system.h"
+#include "esp_mac.h" // MAC2STR
 #include "esp_wifi.h"
 #include "esp_vfs.h"
 #include "nvs_flash.h"
@@ -40,11 +43,12 @@ static int s_retry_num = 0;
 #define WIFI_FAIL_BIT BIT1
 #endif
 
+#if CONFIG_AP_MODE || CONFIG_STA_MODE
 static void wifi_event_handler(void* arg, esp_event_base_t event_base, 
 								int32_t event_id, void* event_data)
 {
-	if (event_base == WIFI_EVENT) ESP_LOGI(TAG, "WIFI_EVENT event_id=%d", event_id);
-	if (event_base == IP_EVENT) ESP_LOGI(TAG, "IP_EVENT event_id=%d", event_id);
+	if (event_base == WIFI_EVENT) ESP_LOGI(TAG, "WIFI_EVENT event_id=%"PRIi32, event_id);
+	if (event_base == IP_EVENT) ESP_LOGI(TAG, "IP_EVENT event_id=%"PRIi32, event_id);
 
 #if CONFIG_AP_MODE
 	if (event_id == WIFI_EVENT_AP_STACONNECTED) {
@@ -76,6 +80,7 @@ static void wifi_event_handler(void* arg, esp_event_base_t event_base,
 	}
 #endif
 }
+#endif
 
 #if CONFIG_AP_MODE
 void wifi_init_softap()
@@ -217,6 +222,20 @@ void wifi_init_sta()
 		ESP_LOGE(TAG, "UNEXPECTED EVENT");
 	}
 }
+
+void initialise_mdns(void)
+{
+	//initialize mDNS
+	ESP_ERROR_CHECK( mdns_init() );
+	//set mDNS hostname (required if you want to advertise services)
+	ESP_ERROR_CHECK( mdns_hostname_set(CONFIG_MDNS_HOSTNAME) );
+	ESP_LOGI(TAG, "mdns hostname set to: [%s]", CONFIG_MDNS_HOSTNAME);
+
+#if 0
+	//set default mDNS instance name
+	ESP_ERROR_CHECK( mdns_instance_name_set("ESP32 with mDNS") );
+#endif
+}
 #endif // CONFIG_ST_MODE
 
 void tcp_server(void *pvParameters);
@@ -246,6 +265,7 @@ void app_main()
 	// Initialize WiFi STA
 	ESP_LOGI(TAG, "ESP32 is WiFi STA MODE");
 	wifi_init_sta();
+	initialise_mdns();
 	esp_netif_ip_info_t ip_info;
 	ESP_ERROR_CHECK(esp_netif_get_ip_info(esp_netif_get_handle_from_ifkey("WIFI_STA_DEF"), &ip_info));
 #endif

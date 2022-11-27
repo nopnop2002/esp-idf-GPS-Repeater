@@ -11,7 +11,7 @@ def handler(signal, frame):
 	TaskRunning = False
 
 
-host = "192.168.10.131" # mDNS hostname
+host = "esp32-server.local" # mDNS hostname
 port = 5000
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -25,7 +25,10 @@ signal.signal(signal.SIGINT, handler)
 
 while(TaskRunning):
 	msg = client.recv(1024)
-	print(msg.decode("utf-8"))
+	#print("type(msg)={}".format(type(msg)))
+	if (type(msg) is bytes):
+		msg=msg.decode('utf-8')
+		print(msg.strip())
 
 client.close()
 

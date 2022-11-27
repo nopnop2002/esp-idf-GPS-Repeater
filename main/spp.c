@@ -6,10 +6,11 @@
    CONDITIONS OF ANY KIND, either express or implied.
 */
 
+#include <stdio.h>
+#include <inttypes.h>
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
-#include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
@@ -64,7 +65,7 @@ static void esp_spp_cb(esp_spp_cb_event_t event, esp_spp_cb_param_t *param)
 		ESP_LOGI(SPP_TAG, "ESP_SPP_CL_INIT_EVT");
 		break;
 	case ESP_SPP_DATA_IND_EVT:
-		ESP_LOGI(SPP_TAG, "ESP_SPP_DATA_IND_EVT len=%d handle=%d",
+		ESP_LOGI(SPP_TAG, "ESP_SPP_DATA_IND_EVT len=%d handle=%"PRIu32,
 				 param->data_ind.len, param->data_ind.handle);
 		esp_log_buffer_hex("",param->data_ind.data,param->data_ind.len);
 		break;
@@ -188,7 +189,7 @@ void spp_server(void *pvParameters)
 	CMD_t cmdBuf;
 	while(1) {
 		xQueueReceive(xQueueSend, &cmdBuf, portMAX_DELAY);
-		ESP_LOGD(SPP_TAG,"cmdBuf.command=%d sppHandle=%d", cmdBuf.command, cmdBuf.sppHandle);
+		ESP_LOGD(SPP_TAG,"cmdBuf.command=%d sppHandle=%"PRIu32, cmdBuf.command, cmdBuf.sppHandle);
 		if (cmdBuf.command == CMD_NMEA) {
 			if (cmdBuf.sppHandle == 0) continue;
 			esp_spp_write(cmdBuf.sppHandle, cmdBuf.length, cmdBuf.payload);

@@ -80,13 +80,19 @@ menu "Application Configuration"
 		help
 			Max number of the STA connects to AP.
 
-
 	config ESP_MAXIMUM_RETRY
 		depends on STA_MODE
 		int "Maximum retry"
 		default 5
 		help
 			Set the Maximum retry to avoid station reconnecting to the AP unlimited when the AP is really inexistent.
+
+	config MDNS_HOSTNAME
+		depends on STA_MODE
+		string "mDNS Hostname"
+		default "esp32-server"
+		help
+			mDNS Hostname for example to use
 
 	config STATIC_IP
 		depends on STA_MODE
