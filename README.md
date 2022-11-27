@@ -70,7 +70,11 @@ ESP32 acts as a TCP Server.
 Build the firmware using TCP socket.   
 
 Start u-center and connect to ESP32.   
+You can use mDNS host name as IP.   
 Default port is 5000.   
+
+```tcp://esp32-server.local:5000```
+
 
 ![u-center-0](https://user-images.githubusercontent.com/6020549/204116486-f6e8a40f-9045-4d62-8a9b-153bb298ddea.jpg)
 ![u-center-1](https://user-images.githubusercontent.com/6020549/204116485-0678cdfc-b5ab-404f-8d84-a47943527a5d.jpg)
