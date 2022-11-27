@@ -66,7 +66,7 @@ You can use iPhone/Android as receiver.
 # GPS Server for u-center
 [u-center](https://www.u-blox.com/en/product/u-center) is a very powerful NMEA message analysis tool.   
 You can use ESP32 as u-center's GPS Server.   
-ESP32 acts as a Socket Server.   
+ESP32 acts as a TCP Server.   
 Build the firmware using TCP socket.   
 
 Start u-center and connect to ESP32.   
