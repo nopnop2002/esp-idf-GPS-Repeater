@@ -8,7 +8,7 @@ I put my ESP32 and GPS receiver by the window and forward NMEA messages over WiF
 
 
 # Software requirements
-esp-idf v4.4/v5.0   
+esp-idf v4.4/v5.x   
 
 
 # Hardware requirements

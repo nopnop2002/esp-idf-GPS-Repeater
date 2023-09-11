@@ -46,7 +46,7 @@ menu "Application Configuration"
 	choice WIFI_MODE
 		depends on TCP_SOCKET || UDP_BROADCAST
 		prompt "Wi-Fi Access mode"
-		default AP_MODE
+		default STA_MODE
 		help
 			Select Wi-Fi Access mode.
 		config STA_MODE
