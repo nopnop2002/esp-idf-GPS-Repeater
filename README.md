@@ -41,6 +41,8 @@ You can configure UART GPIO port and transfer protocol using menuconfig.
 ![0001](https://user-images.githubusercontent.com/6020549/121999796-c53abd80-cde8-11eb-9715-010d359806d6.jpg)
 
 ![config-tcp-ap](https://user-images.githubusercontent.com/6020549/204115300-0299a2bb-30a6-4889-b207-f2605adb4f8b.jpg)
+
+Select WiFi mode.
 ![config-tcp-sta](https://user-images.githubusercontent.com/6020549/204115301-b3619477-bc67-49cf-bd7c-c055038b53c4.jpg)
 
 You can use tcp.py as receiver.   
@@ -50,6 +52,8 @@ You can use tcp.py as receiver.
 ![0002](https://user-images.githubusercontent.com/6020549/121999806-c966db00-cde8-11eb-9e83-1bdf7018b47c.jpg)
 
 ![config-udp-ap](https://user-images.githubusercontent.com/6020549/204115314-54db412f-f918-4ab2-b78e-8e8c085aee5c.jpg)
+
+Select WiFi mode.
 ![config-udp-sta](https://user-images.githubusercontent.com/6020549/204115315-704c8603-b923-432a-befd-34146480aff0.jpg)
 
 You can use udp.py as receiver.   
