@@ -60,12 +60,11 @@ You can use udp.py as receiver.
 `python ./udp.py`
 
 ## Transfer using Bluetooth SPP   
-
+You can use iPhone/Android as receiver.   
 ![0003](https://user-images.githubusercontent.com/6020549/121999813-cbc93500-cde8-11eb-9de1-927f0d70b3af.jpg)
 
 ![config-spp](https://user-images.githubusercontent.com/6020549/122000026-2498cd80-cde9-11eb-95b4-ff4458cc3502.jpg)
 
-You can use iPhone/Android as receiver.
 
 # GPS Server for u-center
 [u-center](https://www.u-blox.com/en/product/u-center) is a very powerful NMEA message analysis tool.   
