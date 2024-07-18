@@ -24,7 +24,7 @@ GPS module like NEO-6M
 |GND|--|GND|GND|GND||
 |TXD|--|GPIO16|GPIO1|GPIO0|
 
-You can GPIO to any pin using menuconfig.
+You can change GPIO to any pin using menuconfig.
 
 # Installation
 ```
