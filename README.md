@@ -106,7 +106,7 @@ Build ESP32's firmware using Classic Bluetooth SPP.
 
 1.Pair with ESP_SPP_ACCEPTOR.   
 2.Open application.   
-3.Open setting page.
+3.Open setting page.   
 4.Select Bluetooth Classic as NMEA input source.   
 
 ![GPSConnector-1](https://github.com/user-attachments/assets/6140b4c0-aa89-4296-a652-da00ad5d56eb)
