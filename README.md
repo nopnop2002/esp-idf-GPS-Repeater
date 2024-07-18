@@ -47,7 +47,7 @@ Select WiFi mode.
 ![config-tcp-sta](https://user-images.githubusercontent.com/6020549/204115301-b3619477-bc67-49cf-bd7c-c055038b53c4.jpg)
 
 You can use tcp.py as receiver.   
-`python ./tcp.py`
+`python3 ./tcp.py`
 
 ## Transfer using UDP Broadcast   
 ![0002](https://user-images.githubusercontent.com/6020549/121999806-c966db00-cde8-11eb-9e83-1bdf7018b47c.jpg)
@@ -58,7 +58,7 @@ Select WiFi mode.
 ![config-udp-sta](https://user-images.githubusercontent.com/6020549/204115315-704c8603-b923-432a-befd-34146480aff0.jpg)
 
 You can use udp.py as receiver.   
-`python ./udp.py`
+`python3 ./udp.py`
 
 ## Transfer using Classic Bluetooth SPP (ESP32 only)   
 You can use iPhone/Android as receiver.   
