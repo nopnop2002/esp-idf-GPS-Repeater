@@ -23,7 +23,6 @@
 
 #include "cmd.h"
 
-#if CONFIG_BLUETOOTH_SPP
 #define SPP_TAG "SPP_ACCEPTOR"
 #define SPP_SERVER_NAME "SPP_SERVER"
 #define EXAMPLE_DEVICE_NAME "ESP_SPP_ACCEPTOR"
@@ -205,4 +204,3 @@ void spp_server(void *pvParameters)
 		}
 	}
 }
-#endif

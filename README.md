@@ -8,7 +8,8 @@ I put my ESP32 and GPS receiver by the window and forward NMEA messages over WiF
 
 
 # Software requirements
-esp-idf v4.4/v5.x   
+ESP-IDF V5.0 or later.   
+ESP-IDF V4.4 release branch reached EOL in July 2024.   
 
 
 # Hardware requirements
@@ -17,18 +18,18 @@ GPS module like NEO-6M
 
 # Wireing to GPS module
 
-|GPS||ESP32|
-|:-:|:-:|:-:|
-|VCC|--|3.3V|
-|GND|--|GND|
-|TXD|--|Any Pin|
+|GPS||ESP32|ESP32-S2/S3|ESP32C2/C3/C6|
+|:-:|:-:|:-:|:-:|:-:|
+|VCC|--|3.3V|3.3V|3.3V|
+|GND|--|GND|GND|GND||
+|TXD|--|GPIO16|GPIO1|GPIO0|
 
+You can GPIO to any pin using menuconfig.
 
 # Installation
 ```
 git clone https://github.com/nopnop2002/esp-idf-GPS-Repeater
 cd esp-idf-GPS-Repeater
-idf.py set-target esp32
 idf.py menuconfig
 idf.py flash
 ```
@@ -59,7 +60,7 @@ Select WiFi mode.
 You can use udp.py as receiver.   
 `python ./udp.py`
 
-## Transfer using Bluetooth SPP   
+## Transfer using Classic Bluetooth SPP (ESP32 only)   
 You can use iPhone/Android as receiver.   
 ![0003](https://user-images.githubusercontent.com/6020549/121999813-cbc93500-cde8-11eb-9de1-927f0d70b3af.jpg)
 
@@ -86,11 +87,10 @@ Default port is 5000.
 ![u-center-4](https://user-images.githubusercontent.com/6020549/62000220-57118280-b10c-11e9-825f-cf77f2fdcb5b.JPG)
 ![u-center-5](https://user-images.githubusercontent.com/6020549/62000221-57aa1900-b10c-11e9-833d-1a5a05aa68ae.jpg)
 
-# GPS Server for Bluetooth GPS
-Bluetooth GPS is Android Application.   
+# GPS Server for Bluetooth GPS (Android Application)
 You can download from [here](https://play.google.com/store/apps/details?id=googoo.android.btgps).   
-ESP32 acts as a SPP Acceptor.   
-Build the firmware using Bluetooth SPP.   
+Android acts as a SPP Initiator, and ESP32 acts as a SPP Acceptor.   
+Build ESP32's firmware using Classic Bluetooth SPP.   
 
 1.Pair with ESP_SPP_ACCEPTOR.   
 2.Open application.   
@@ -98,6 +98,21 @@ Build the firmware using Bluetooth SPP.
 
 ![android-1](https://user-images.githubusercontent.com/6020549/122001254-ffa55a00-cdea-11eb-8962-0399f9ce102d.JPG)
 ![android-2](https://user-images.githubusercontent.com/6020549/122001257-00d68700-cdeb-11eb-84c9-dc4b1428c389.JPG)
+
+# GPS Server for GPS Connector (Android Application)
+You can download from [here](https://play.google.com/store/apps/details?id=de.pilablu.gpsconnector).   
+Android acts as a SPP Initiator, and ESP32 acts as a SPP Acceptor.   
+Build ESP32's firmware using Classic Bluetooth SPP.   
+
+1.Pair with ESP_SPP_ACCEPTOR.   
+2.Open application.   
+3.Open setting page.
+4.Select Bluetooth Classic as NMEA input source.   
+
+![GPSConnector-1](https://github.com/user-attachments/assets/6140b4c0-aa89-4296-a652-da00ad5d56eb)
+![GPSConnector-2](https://github.com/user-attachments/assets/7f4a84fe-3174-42b7-a713-01c865d21c88)
+![GPSConnector-3](https://github.com/user-attachments/assets/4a8f0641-da41-420b-897b-0c5a99c1afc6)
+![GPSConnector-4](https://github.com/user-attachments/assets/5d10edea-2c05-4f1d-a46f-7b4ddc45df3a)
 
 # References
 Repository with UI is [here](https://github.com/nopnop2002/esp-idf-GPS-View).   

@@ -1,13 +1,23 @@
 menu "Application Configuration"
 
+	config GPIO_RANGE_MAX
+		int
+		default 33 if IDF_TARGET_ESP32
+		default 46 if IDF_TARGET_ESP32S2
+		default 48 if IDF_TARGET_ESP32S3
+		default 18 if IDF_TARGET_ESP32C2
+		default 19 if IDF_TARGET_ESP32C3
+		default 30 if IDF_TARGET_ESP32C6
+
 	config UART_RXD_GPIO
 		int "GPS RX GPIO number"
-		range 1 34
-		default 22
+		range 0 GPIO_RANGE_MAX
+		default 16 if IDF_TARGET_ESP32
+		default  1 if IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
+		default  0 # C3 and others
 		help
 			GPIO number (IOxx) for GPS RXD.
 			Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to RXD.
-			GPIO 00 assigned as TXD, but not used.
 
 	choice TRANSFER
 		prompt "Transfer mode"
@@ -23,6 +33,7 @@ menu "Application Configuration"
 			help
 				ESP32 runs as UDP Server.
 		config BLUETOOTH_SPP
+			depends on IDF_TARGET_ESP32
 			bool "Classic Bluetooth SPP Acceptor"
 			help
 				ESP32 runs as SPP Acceptor.

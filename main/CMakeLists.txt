@@ -1,2 +1,11 @@
-set(srcs "main.c" "uart_event.c" "tcp.c" "udp.c" "spp.c")
-idf_component_register(SRCS ${srcs} INCLUDE_DIRS "." REQUIRED_IDF_TARGETS esp32)
+set(srcs "main.c" "uart_event.c")
+
+if (CONFIG_TCP_SOCKET)
+	list(APPEND srcs "tcp.c")
+elseif (CONFIG_UDP_BROADCAST)
+	list(APPEND srcs "udp.c")
+elseif (CONFIG_BLUETOOTH_SPP)
+	list(APPEND srcs "spp.c")
+endif()
+
+idf_component_register(SRCS ${srcs} INCLUDE_DIRS ".")

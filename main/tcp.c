@@ -14,7 +14,6 @@
 
 #include "cmd.h"
 
-#if CONFIG_TCP_SOCKET
 static const char *TAG = "TCP";
 
 extern QueueHandle_t xQueueCmd;
@@ -94,5 +93,3 @@ void tcp_server(void *pvParameters)
 	vTaskDelete( NULL );
 
 }
-#endif
-

@@ -15,8 +15,6 @@
 
 #include "cmd.h"
 
-#if CONFIG_UDP_BROADCAST
-
 static const char *TAG = "UDP";
 
 extern QueueHandle_t xQueueCmd;
@@ -60,5 +58,3 @@ void udp_broadcast(void *pvParameters)
 	LWIP_ASSERT("ret == 0", ret == 0);
 	vTaskDelete( NULL );
 }
-#endif
-
