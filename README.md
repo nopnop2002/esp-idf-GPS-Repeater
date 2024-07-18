@@ -18,7 +18,7 @@ GPS module like NEO-6M
 
 # Wireing to GPS module
 
-|GPS||ESP32|ESP32-S2/S3|ESP32C2/C3/C6|
+|GPS||ESP32|ESP32-S2/S3|ESP32-C2/C3/C6|
 |:-:|:-:|:-:|:-:|:-:|
 |VCC|--|3.3V|3.3V|3.3V|
 |GND|--|GND|GND|GND||
