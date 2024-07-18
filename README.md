@@ -36,7 +36,7 @@ idf.py flash
 
 
 # Configure
-You can configure UART GPIO port and transfer protocol using menuconfig.
+You can configure UART-RX GPIO port and transfer protocol using menuconfig.
 
 ## Transfer using TCP Socket   
 ![0001](https://user-images.githubusercontent.com/6020549/121999796-c53abd80-cde8-11eb-9715-010d359806d6.jpg)
