@@ -25,7 +25,7 @@
 
 #define SPP_TAG "SPP_ACCEPTOR"
 #define SPP_SERVER_NAME "SPP_SERVER"
-#define EXAMPLE_DEVICE_NAME "ESP_SPP_ACCEPTOR"
+#define DEVICE_NAME "ESP_SPP_ACCEPTOR"
 
 static const esp_spp_mode_t esp_spp_mode = ESP_SPP_MODE_CB;
 
@@ -41,7 +41,11 @@ static void esp_spp_cb(esp_spp_cb_event_t event, esp_spp_cb_param_t *param)
 	switch (event) {
 	case ESP_SPP_INIT_EVT:
 		ESP_LOGI(SPP_TAG, "ESP_SPP_INIT_EVT");
-		esp_bt_dev_set_device_name(EXAMPLE_DEVICE_NAME);
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 3, 0)
+		esp_bt_gap_set_device_name(DEVICE_NAME);
+#else
+		esp_bt_dev_set_device_name(DEVICE_NAME);
+#endif
 		esp_bt_gap_set_scan_mode(ESP_BT_CONNECTABLE, ESP_BT_GENERAL_DISCOVERABLE);
 		esp_spp_start_srv(sec_mask,role_slave, 0, SPP_SERVER_NAME);
 		break;
