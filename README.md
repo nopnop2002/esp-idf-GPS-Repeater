@@ -87,17 +87,6 @@ Default port is 5000.
 ![u-center-4](https://user-images.githubusercontent.com/6020549/62000220-57118280-b10c-11e9-825f-cf77f2fdcb5b.JPG)
 ![u-center-5](https://user-images.githubusercontent.com/6020549/62000221-57aa1900-b10c-11e9-833d-1a5a05aa68ae.jpg)
 
-# GPS Server for Bluetooth GPS (Android Application)
-You can download from [here](https://play.google.com/store/apps/details?id=googoo.android.btgps).   
-Android acts as a SPP Initiator, and ESP32 acts as a SPP Acceptor.   
-Build ESP32's firmware using Classic Bluetooth SPP.   
-
-1.Pair with ESP_SPP_ACCEPTOR.   
-2.Open application.   
-3.CONNECT.   
-
-![android-1](https://user-images.githubusercontent.com/6020549/122001254-ffa55a00-cdea-11eb-8962-0399f9ce102d.JPG)
-![android-2](https://user-images.githubusercontent.com/6020549/122001257-00d68700-cdeb-11eb-84c9-dc4b1428c389.JPG)
 
 # GPS Server for GPS Connector (Android Application)
 You can download from [here](https://play.google.com/store/apps/details?id=de.pilablu.gpsconnector).   
