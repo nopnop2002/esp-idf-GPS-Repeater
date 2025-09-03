@@ -70,7 +70,7 @@ static void esp_spp_cb(esp_spp_cb_event_t event, esp_spp_cb_param_t *param)
 	case ESP_SPP_DATA_IND_EVT:
 		ESP_LOGI(SPP_TAG, "ESP_SPP_DATA_IND_EVT len=%d handle=%"PRIu32,
 				 param->data_ind.len, param->data_ind.handle);
-		esp_log_buffer_hex("",param->data_ind.data,param->data_ind.len);
+		ESP_LOG_BUFFER_HEXDUMP(SPP_TAG, param->data_ind.data, param->data_ind.len, ESP_LOG_INFO);
 		break;
 	case ESP_SPP_CONG_EVT:
 		ESP_LOGI(SPP_TAG, "ESP_SPP_CONG_EVT");
@@ -101,7 +101,7 @@ void esp_bt_gap_cb(esp_bt_gap_cb_event_t event, esp_bt_gap_cb_param_t *param)
 		case ESP_BT_GAP_AUTH_CMPL_EVT:{
 			if (param->auth_cmpl.stat == ESP_BT_STATUS_SUCCESS) {
 				ESP_LOGI(SPP_TAG, "authentication success: %s", param->auth_cmpl.device_name);
-				esp_log_buffer_hex(SPP_TAG, param->auth_cmpl.bda, ESP_BD_ADDR_LEN);
+				ESP_LOG_BUFFER_HEXDUMP(SPP_TAG, param->auth_cmpl.bda, ESP_BD_ADDR_LEN, ESP_LOG_INFO);
 			} else {
 				ESP_LOGE(SPP_TAG, "authentication failed, status:%d", param->auth_cmpl.stat);
 			}

@@ -30,10 +30,10 @@ extern QueueHandle_t xQueueCmd;
 
 void uart_event_task(void *pvParameters)
 {
-	ESP_LOGI(pcTaskGetName(0), "Start");
-	esp_log_level_set(pcTaskGetName(0), ESP_LOG_WARN);
+	ESP_LOGI(pcTaskGetName(NULL), "Start");
+	esp_log_level_set(pcTaskGetName(NULL), ESP_LOG_WARN);
 
-	ESP_LOGI(pcTaskGetName(0), "Initializing UART");
+	ESP_LOGI(pcTaskGetName(NULL), "Initializing UART");
 	/* Configure parameters of an UART driver,
 	 * communication pins and install the driver */
 	uart_config_t uart_config = {
@@ -51,7 +51,7 @@ void uart_event_task(void *pvParameters)
 	uart_param_config(UART_NUM_1, &uart_config);
 
 	//Set UART pins (using UART0 default pins ie no changes.)
-	ESP_LOGI(pcTaskGetName(0), "CONFIG_UART_RXD_GPIO=%d", CONFIG_UART_RXD_GPIO);
+	ESP_LOGI(pcTaskGetName(NULL), "CONFIG_UART_RXD_GPIO=%d", CONFIG_UART_RXD_GPIO);
 	uart_set_pin(UART_NUM_1, TXD_GPIO, CONFIG_UART_RXD_GPIO, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
 
 	//Install UART driver, and get the queue handle.
@@ -63,7 +63,7 @@ void uart_event_task(void *pvParameters)
 	uart_enable_pattern_det_baud_intr(UART_NUM_1, 0x0a, 1, 9, 0, 0); // pattern is LF
 	//Reset the pattern queue length to record at most 20 pattern positions.
 	uart_pattern_queue_reset(UART_NUM_1, 20);
-	ESP_LOGI(pcTaskGetName(0), "Initializing UART done");
+	ESP_LOGI(pcTaskGetName(NULL), "Initializing UART done");
 
 	uart_event_t event;
 	size_t buffered_size;
@@ -76,18 +76,20 @@ void uart_event_task(void *pvParameters)
 		//Waiting for UART event.
 		if(xQueueReceive(uart0_queue, (void * )&event, portMAX_DELAY)) {
 			bzero(data, RX_BUF_SIZE);
-			ESP_LOGI(pcTaskGetName(0), "uart[%d] event:", UART_NUM_1);
+			ESP_LOGI(pcTaskGetName(NULL), "uart[%d] event:", UART_NUM_1);
 			switch(event.type) {
 				//Event of UART receving data
 				/*We'd better handler data event fast, there would be much more data events than
 				other types of events. If we take too much time on data event, the queue might
 				be full.*/
 				case UART_DATA:
-					ESP_LOGI(pcTaskGetName(0), "[UART DATA]: %d", event.size);
+					ESP_LOGI(pcTaskGetName(NULL), "[UART DATA]: %d", event.size);
+					uart_read_bytes(UART_NUM_1, data, event.size, portMAX_DELAY);
+					ESP_LOG_BUFFER_HEXDUMP(pcTaskGetName(NULL), data, event.size, ESP_LOG_INFO);
 					break;
 				//Event of HW FIFO overflow detected
 				case UART_FIFO_OVF:
-					ESP_LOGW(pcTaskGetName(0), "hw fifo overflow");
+					ESP_LOGW(pcTaskGetName(NULL), "hw fifo overflow");
 					// If fifo overflow happened, you should consider adding flow control for your application.
 					// The ISR has already reset the rx FIFO,
 					// As an example, we directly flush the rx buffer here in order to read more data.
@@ -96,7 +98,7 @@ void uart_event_task(void *pvParameters)
 					break;
 				//Event of UART ring buffer full
 				case UART_BUFFER_FULL:
-					ESP_LOGW(pcTaskGetName(0), "ring buffer full");
+					ESP_LOGW(pcTaskGetName(NULL), "ring buffer full");
 					// If buffer full happened, you should consider encreasing your buffer size
 					// As an example, we directly flush the rx buffer here in order to read more data.
 					uart_flush_input(UART_NUM_1);
@@ -104,21 +106,21 @@ void uart_event_task(void *pvParameters)
 					break;
 				//Event of UART RX break detected
 				case UART_BREAK:
-					ESP_LOGW(pcTaskGetName(0), "uart rx break");
+					ESP_LOGW(pcTaskGetName(NULL), "uart rx break");
 					break;
 				//Event of UART parity check error
 				case UART_PARITY_ERR:
-					ESP_LOGW(pcTaskGetName(0), "uart parity error");
+					ESP_LOGW(pcTaskGetName(NULL), "uart parity error");
 					break;
 				//Event of UART frame error
 				case UART_FRAME_ERR:
-					ESP_LOGW(pcTaskGetName(0), "uart frame error");
+					ESP_LOGW(pcTaskGetName(NULL), "uart frame error");
 					break;
 				//UART_PATTERN_DET
 				case UART_PATTERN_DET:
 					uart_get_buffered_data_len(UART_NUM_1, &buffered_size);
 					int pos = uart_pattern_pop_pos(UART_NUM_1);
-					ESP_LOGI(pcTaskGetName(0), "[UART PATTERN DETECTED] pos: %d, buffered size: %d", pos, buffered_size);
+					ESP_LOGI(pcTaskGetName(NULL), "[UART PATTERN DETECTED] pos: %d, buffered size: %d", pos, buffered_size);
 					if (pos == -1) {
 						// There used to be a UART_PATTERN_DET event, but the pattern position queue is full so that it can not
 						// record the position. We should set a larger queue size.
@@ -126,8 +128,8 @@ void uart_event_task(void *pvParameters)
 						uart_flush_input(UART_NUM_1);
 					} else {
 						uart_read_bytes(UART_NUM_1, data, buffered_size, 100 / portTICK_PERIOD_MS);
-						ESP_LOGI(pcTaskGetName(0), "read data: %s", data);
-						ESP_LOG_BUFFER_HEXDUMP(pcTaskGetName(0), data, buffered_size, ESP_LOG_INFO);
+						ESP_LOGI(pcTaskGetName(NULL), "read data: %s", data);
+						ESP_LOG_BUFFER_HEXDUMP(pcTaskGetName(NULL), data, buffered_size, ESP_LOG_INFO);
 #if 0
 I (53691) uart_event: [UART PATTERN DETECTED] pos: 68, buffered size: 69
 I (53701) uart_event: 0x3ffceb48	 24 47 50 52 4d 43 2c 31	32 33 39 31 32 2c 41 2c  |$GPRMC,123912,A,|
@@ -144,7 +146,7 @@ I (53741) uart_event: 0x3ffceb88	 2a 34 33 0d 0a																		 |*43..|
 					break;
 				//Others
 				default:
-					ESP_LOGW(pcTaskGetName(0), "uart event type: %d", event.type);
+					ESP_LOGW(pcTaskGetName(NULL), "uart event type: %d", event.type);
 					break;
 			} // end switch
 		} // end if
