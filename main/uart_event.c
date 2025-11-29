@@ -139,7 +139,7 @@ I (53741) uart_event: 0x3ffceb88	 2a 34 33 0d 0a																		 |*43..|
 						cmdBuf.length = buffered_size;
 						memcpy((char *)cmdBuf.payload, (char *)data, buffered_size); 
 						cmdBuf.payload[buffered_size] = 0;
-						xQueueSend(xQueueCmd, &cmdBuf, 0);
+						xQueueSend(xQueueCmd, &cmdBuf, 0); // Send NMEA
 					}
 					break;
 				//Others

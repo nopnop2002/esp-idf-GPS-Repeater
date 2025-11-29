@@ -59,7 +59,7 @@ static void esp_spp_cb(esp_spp_cb_event_t event, esp_spp_cb_param_t *param)
 		ESP_LOGI(SPP_TAG, "ESP_SPP_CLOSE_EVT");
 		cmdBuf.command = CMD_DISCONNECT;
 		cmdBuf.sppHandle = 0;
-		xQueueSend(xQueueCmd, &cmdBuf, 0);
+		xQueueSend(xQueueCmd, &cmdBuf, 0); // Send DISCONNECT
 		break;
 	case ESP_SPP_START_EVT:
 		ESP_LOGI(SPP_TAG, "ESP_SPP_START_EVT");
@@ -69,7 +69,7 @@ static void esp_spp_cb(esp_spp_cb_event_t event, esp_spp_cb_param_t *param)
 		break;
 	case ESP_SPP_DATA_IND_EVT:
 		ESP_LOGI(SPP_TAG, "ESP_SPP_DATA_IND_EVT len=%d handle=%"PRIu32,
-				 param->data_ind.len, param->data_ind.handle);
+			param->data_ind.len, param->data_ind.handle);
 		ESP_LOG_BUFFER_HEXDUMP(SPP_TAG, param->data_ind.data, param->data_ind.len, ESP_LOG_INFO);
 		break;
 	case ESP_SPP_CONG_EVT:
@@ -82,7 +82,7 @@ static void esp_spp_cb(esp_spp_cb_event_t event, esp_spp_cb_param_t *param)
 		ESP_LOGI(SPP_TAG, "ESP_SPP_SRV_OPEN_EVT");
 		cmdBuf.command = CMD_CONNECT;
 		cmdBuf.sppHandle = param->srv_open.handle;
-		xQueueSend(xQueueCmd, &cmdBuf, 0);
+		xQueueSend(xQueueCmd, &cmdBuf, 0); // Send CONNECT
 		break;
 	case ESP_SPP_SRV_STOP_EVT:
 		ESP_LOGI(SPP_TAG, "ESP_SPP_SRV_STOP_EVT");
