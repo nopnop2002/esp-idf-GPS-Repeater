@@ -256,7 +256,6 @@ void app_main()
 	// Initialize WiFi SoftAP
 	ESP_LOGI(TAG, "ESP32 is WiFi AP MODE");
 	wifi_init_softap();
-
 	// Obtain local IP address
 	esp_netif_ip_info_t ip_info;
 	ESP_ERROR_CHECK(esp_netif_get_ip_info(esp_netif_get_handle_from_ifkey("WIFI_AP_DEF"), &ip_info));
@@ -266,10 +265,8 @@ void app_main()
 	// Initialize WiFi STA
 	ESP_LOGI(TAG, "ESP32 is WiFi STA MODE");
 	wifi_init_sta();
-
 	// Initialize mDNS
 	initialize_mdns();
-
 	// Obtain local IP address
 	esp_netif_ip_info_t ip_info;
 	ESP_ERROR_CHECK(esp_netif_get_ip_info(esp_netif_get_handle_from_ifkey("WIFI_STA_DEF"), &ip_info));
