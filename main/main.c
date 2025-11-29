@@ -45,8 +45,7 @@ static int s_retry_num = 0;
 #endif
 
 #if CONFIG_AP_MODE || CONFIG_STA_MODE
-static void wifi_event_handler(void* arg, esp_event_base_t event_base, 
-								int32_t event_id, void* event_data)
+static void wifi_event_handler(void* arg, esp_event_base_t event_base, int32_t event_id, void* event_data)
 {
 	if (event_base == WIFI_EVENT) ESP_LOGI(TAG, "WIFI_EVENT event_id=%"PRIi32, event_id);
 	if (event_base == IP_EVENT) ESP_LOGI(TAG, "IP_EVENT event_id=%"PRIi32, event_id);
@@ -94,10 +93,10 @@ void wifi_init_softap()
 	ESP_ERROR_CHECK(esp_wifi_init(&cfg));
 
 	ESP_ERROR_CHECK(esp_event_handler_instance_register(WIFI_EVENT,
-									ESP_EVENT_ANY_ID,
-									&wifi_event_handler,
-									NULL,
-									NULL));
+		ESP_EVENT_ANY_ID,
+		&wifi_event_handler,
+		NULL,
+		NULL));
 
 	wifi_config_t wifi_config = {
 		.ap = {
@@ -116,7 +115,7 @@ void wifi_init_softap()
 	}
 
 	ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_AP));
-	ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_AP, &wifi_config));
+	ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_AP, &wifi_config));
 	ESP_ERROR_CHECK(esp_wifi_start());
 
 	ESP_LOGI(TAG, "wifi_init_softap finished. SSID:%s password:%s", CONFIG_ESP_WIFI_SSID, CONFIG_ESP_WIFI_PASSWORD);
@@ -175,15 +174,15 @@ void wifi_init_sta()
 	esp_event_handler_instance_t instance_any_id;
 	esp_event_handler_instance_t instance_got_ip;
 	ESP_ERROR_CHECK(esp_event_handler_instance_register(WIFI_EVENT,
-									ESP_EVENT_ANY_ID,
-									&wifi_event_handler,
-									NULL,
-									&instance_any_id));
+		ESP_EVENT_ANY_ID,
+		&wifi_event_handler,
+		NULL,
+		&instance_any_id));
 	ESP_ERROR_CHECK(esp_event_handler_instance_register(IP_EVENT,
-									IP_EVENT_STA_GOT_IP,
-									&wifi_event_handler,
-									NULL,
-									&instance_got_ip));
+		IP_EVENT_STA_GOT_IP,
+		&wifi_event_handler,
+		NULL,
+		&instance_got_ip));
 
 	wifi_config_t wifi_config = {
 		.sta = {
@@ -199,11 +198,10 @@ void wifi_init_sta()
 			},
 		},
 	};
-	ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA) );
-	ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_STA, &wifi_config) );
-	ESP_ERROR_CHECK(esp_wifi_start() );
-
-	ESP_LOGI(TAG, "wifi_init_sta finished.");
+	ESP_ERROR_CHECK(esp_wifi_set_ps(WIFI_PS_NONE));
+	ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
+	ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &wifi_config));
+	ESP_ERROR_CHECK(esp_wifi_start());
 
 	/* Waiting until either the connection is established (WIFI_CONNECTED_BIT) or connection failed for the maximum
 	 * number of re-tries (WIFI_FAIL_BIT). The bits are set by event_handler() (see above) */
@@ -224,7 +222,7 @@ void wifi_init_sta()
 	}
 }
 
-void initialise_mdns(void)
+void initialize_mdns(void)
 {
 	//initialize mDNS
 	ESP_ERROR_CHECK( mdns_init() );
@@ -258,6 +256,8 @@ void app_main()
 	// Initialize WiFi SoftAP
 	ESP_LOGI(TAG, "ESP32 is WiFi AP MODE");
 	wifi_init_softap();
+
+	// Obtain local IP address
 	esp_netif_ip_info_t ip_info;
 	ESP_ERROR_CHECK(esp_netif_get_ip_info(esp_netif_get_handle_from_ifkey("WIFI_AP_DEF"), &ip_info));
 #endif
@@ -266,7 +266,11 @@ void app_main()
 	// Initialize WiFi STA
 	ESP_LOGI(TAG, "ESP32 is WiFi STA MODE");
 	wifi_init_sta();
-	initialise_mdns();
+
+	// Initialize mDNS
+	initialize_mdns();
+
+	// Obtain local IP address
 	esp_netif_ip_info_t ip_info;
 	ESP_ERROR_CHECK(esp_netif_get_ip_info(esp_netif_get_handle_from_ifkey("WIFI_STA_DEF"), &ip_info));
 #endif

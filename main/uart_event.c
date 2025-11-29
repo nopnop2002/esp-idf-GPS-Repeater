@@ -84,8 +84,6 @@ void uart_event_task(void *pvParameters)
 				be full.*/
 				case UART_DATA:
 					ESP_LOGI(pcTaskGetName(NULL), "[UART DATA]: %d", event.size);
-					uart_read_bytes(UART_NUM_1, data, event.size, portMAX_DELAY);
-					ESP_LOG_BUFFER_HEXDUMP(pcTaskGetName(NULL), data, event.size, ESP_LOG_INFO);
 					break;
 				//Event of HW FIFO overflow detected
 				case UART_FIFO_OVF:
