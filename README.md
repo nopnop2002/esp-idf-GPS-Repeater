@@ -60,6 +60,30 @@ Select WiFi mode.
 You can use udp.py as receiver.   
 `python3 ./udp.py`
 
+You can use [micropyGPS](https://github.com/inmcm/micropyGPS) to analyze NMEA.   
+```
+python3 -m pip install git+https://github.com/inmcm/micropyGPS.git
+python3 ./micropy.py --timezone your_time_zone
+
+20:31:25.0
+latitude and longitude: 35.60916317, 139.52503800
+altitude: 83.900000
+satellites_used: [8, 14, 7, 30, 27, 3, 1]
+satellite number: (elevation, azimuth, S/N ratio)
+1: (82, 278, 29)
+2: (58, 34, 14)
+3: (32, 164, 22)
+7: (21, 227, 20)
+8: (40, 81, 27)
+10: (4, 31, 8)
+14: (37, 312, 32)
+17: (15, 288, 7)
+22: (22, 316, 23)
+27: (11, 93, 30)
+30: (25, 256, 19)
+```
+
+
 ## Transfer using Classic Bluetooth SPP (ESP32 only)   
 You can use iPhone/Android as receiver.   
 ![0003](https://user-images.githubusercontent.com/6020549/121999813-cbc93500-cde8-11eb-9de1-927f0d70b3af.jpg)
