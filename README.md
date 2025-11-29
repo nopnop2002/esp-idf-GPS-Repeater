@@ -66,7 +66,7 @@ python3 -m pip install git+https://github.com/inmcm/micropyGPS.git
 python3 ./micropy.py --timezone your_time_zone
 
 20:31:25.0
-latitude and longitude: 35.61481317, 139.52782800
+latitude and longitude: 35.68910517, 139.70072600
 altitude: 83.900000
 satellites_used: [8, 14, 7, 30, 27, 3, 1]
 satellite number: (elevation, azimuth, S/N ratio)
