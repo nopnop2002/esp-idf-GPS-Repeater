@@ -1,17 +1,8 @@
 menu "Application Configuration"
 
-	config GPIO_RANGE_MAX
-		int
-		default 33 if IDF_TARGET_ESP32
-		default 46 if IDF_TARGET_ESP32S2
-		default 48 if IDF_TARGET_ESP32S3
-		default 18 if IDF_TARGET_ESP32C2
-		default 19 if IDF_TARGET_ESP32C3
-		default 30 if IDF_TARGET_ESP32C6
-
 	config UART_RXD_GPIO
 		int "GPS RX GPIO number"
-		range 0 GPIO_RANGE_MAX
+		range 0 SOC_GPIO_IN_RANGE_MAX
 		default 16 if IDF_TARGET_ESP32
 		default  1 if IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
 		default  0 # C3 and others
@@ -108,7 +99,7 @@ menu "Application Configuration"
 	config STATIC_IP
 		depends on STA_MODE
 		bool "Enable Static IP Address"
-		default false
+		default n
 		help
 			Enable Static IP Address.
 
@@ -134,4 +125,3 @@ menu "Application Configuration"
 			Static Netmask for Station.
 
 endmenu
-
